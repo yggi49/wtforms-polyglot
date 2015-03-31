@@ -1,0 +1,4 @@
+*.pyc
+/WTForms_Polyglot.egg-info/
+/build/
+/dist/
