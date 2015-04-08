@@ -1,7 +1,7 @@
 WTForms-Polyglot
 ================
 
-WTForms companion library providing ``PolyglotForm`` for `polyglot HTML`_
+WTForms companion library to provide `polyglot HTML`_ (i.e., XML-compatible)
 output.
 
 .. _`polyglot HTML`: http://www.w3.org/TR/html-polyglot/
@@ -28,3 +28,16 @@ Rendering ``MyForm.foo`` will result in the following XML-compliant output::
 In contrast, using WTForms’ default ``Form``, the output would be::
 
    <input checked id="foo" name="foo" type="checkbox" value="y">
+
+In addition, this package provides a custom implementation of WTForms’
+``SubmitField``, which renders as a ``<button>`` instead of an ``<input>``
+element.  For example::
+
+   from wtf_polyglot import PolyglotForm, SubmitField
+
+   class MyForm(PolyglotForm):
+       foo = SubmitField('Bar')
+
+Produces this output::
+
+   <button id="foo" name="foo" type="submit" value="bar">bar</button>

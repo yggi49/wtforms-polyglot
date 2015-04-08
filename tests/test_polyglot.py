@@ -5,6 +5,7 @@ from wtforms import (StringField, TextAreaField, BooleanField, SelectField,
 
 from wtf_polyglot import PolyglotForm
 from wtf_polyglot.meta import PolyglotHTMLParser
+from wtf_polyglot.fields import SubmitField
 
 
 class PolyglotHTMLParserTest(TestCase):
@@ -121,3 +122,11 @@ class PolyglotFormTest(TestCase):
                          '<option value="1">1</option>'
                          '<option value="2">2</option>'
                          '</select>')
+
+    def test_submit_button(self):
+        class MyForm(PolyglotForm):
+            foo = SubmitField('bar')
+        form = MyForm()
+        self.assertEqual(form.foo(),
+                         '<button id="foo" name="foo" type="submit"'
+                         ' value="bar">bar</button>')

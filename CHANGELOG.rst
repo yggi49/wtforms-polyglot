@@ -2,6 +2,12 @@ WTForms-Polyglot Changelog
 ==========================
 
 
+Release 0.2 (Apr 8, 2015)
+-------------------------
+
+* Add custom ``SubmitField`` implementation
+
+
 Release 0.1.1 (Mar 31, 2015)
 ----------------------------
 

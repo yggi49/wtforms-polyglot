@@ -3,13 +3,13 @@ from setuptools import setup
 
 setup(
     name='WTForms-Polyglot',
-    version='0.1.1',
+    version='0.2',
     url='http://github.com/yggi49/wtforms-polyglot',
     license='BSD',
     author='Clemens Kaposi',
     author_email='clemens@kaposi.name',
-    description=('WTForms companion library providing `PolyglotForm` for '
-                 'polyglot HTML output'),
+    description=('WTForms companion library to provide polyglot HTML '
+                 '(i.e., XML-compatible) output'),
     packages=['wtf_polyglot'],
     install_requires=['WTForms'],
     classifiers=[
