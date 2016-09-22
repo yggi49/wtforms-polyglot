@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 try:
     from html import escape
     from html.parser import HTMLParser
