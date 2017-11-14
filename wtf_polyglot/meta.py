@@ -78,6 +78,9 @@ class PolyglotMeta(DefaultMeta):
         """
         Render a widget, and convert its output to polyglot HTML.
         """
+        other_kw = getattr(field, 'render_kw', None)
+        if other_kw is not None:
+            render_kw = dict(other_kw, **render_kw)
         html = field.widget(field, **render_kw)
         parser = PolyglotHTMLParser()
         parser.feed(html)
