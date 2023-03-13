@@ -1,8 +1,8 @@
 WTForms-Polyglot Changelog
 ==========================
 
-Release 0.4 (unreleased)
-------------------------
+Release 0.4 (Mar 13, 2023)
+--------------------------
 
   * Make WTForms-Polyglot compatible with WTForms 3.x
 
