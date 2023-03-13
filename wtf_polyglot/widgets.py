@@ -1,16 +1,17 @@
-from wtforms.widgets.core import html_params, HTMLString
+from markupsafe import Markup
+from wtforms.widgets.core import html_params
+
+__all__ = ("SubmitButton",)
 
 
-__all__ = ('SubmitButton',)
-
-
-class Button(object):
+class Button:
     """
     Render a basic ``<button>``.
 
     The field's label is used as the text of the button instead of the data on
     the field.
     """
+
     html_params = staticmethod(html_params)
 
     def __init__(self, button_type=None):
@@ -18,16 +19,19 @@ class Button(object):
             self.button_type = button_type
 
     def __call__(self, field, **kwargs):
-        kwargs.setdefault('id', field.id)
-        kwargs.setdefault('type', self.button_type)
-        kwargs.setdefault('value', field.label.text)
-        return HTMLString('<button {}>{}</button>'
-                          .format(self.html_params(name=field.name, **kwargs),
-                                  kwargs['value']))
+        kwargs.setdefault("id", field.id)
+        kwargs.setdefault("type", self.button_type)
+        kwargs.setdefault("value", field.label.text)
+        return Markup(
+            "<button {}>{}</button>".format(
+                self.html_params(name=field.name, **kwargs), kwargs["value"]
+            )
+        )
 
 
 class SubmitButton(Button):
     """
     Render a submit button.
     """
-    button_type = 'submit'
+
+    button_type = "submit"
