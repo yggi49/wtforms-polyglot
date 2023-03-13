@@ -1,9 +1,8 @@
-from wtforms.fields.core import BooleanField
+from wtforms.fields.simple import BooleanField
 
 from .widgets import SubmitButton
 
-
-__all__ = ('SubmitField',)
+__all__ = ("SubmitField",)
 
 
 class SubmitField(BooleanField):
@@ -12,4 +11,5 @@ class SubmitField(BooleanField):
 
     This allows checking if a given submit button has been pressed.
     """
+
     widget = SubmitButton()

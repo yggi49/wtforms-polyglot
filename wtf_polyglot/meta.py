@@ -1,14 +1,8 @@
-from __future__ import unicode_literals
+from html import escape
+from html.parser import HTMLParser
 
-try:
-    from html import escape
-    from html.parser import HTMLParser
-except ImportError:
-    from cgi import escape
-    from HTMLParser import HTMLParser
-
+from markupsafe import Markup
 from wtforms.meta import DefaultMeta
-from wtforms.widgets.core import HTMLString
 
 
 class PolyglotHTMLParser(HTMLParser):
@@ -41,31 +35,31 @@ class PolyglotHTMLParser(HTMLParser):
         for key, value in attrs:
             if value is None:
                 value = key
-            output.append(' {}="{}"'.format(key, escape(value, quote=True)))
-        return ''.join(output)
+            output.append(f' {key}="{escape(value, quote=True)}"')
+        return "".join(output)
 
     def handle_starttag(self, tag, attrs):
-        if tag == 'input':
+        if tag == "input":
             return self.handle_startendtag(tag, attrs)
-        self.output.append('<{}{}>'.format(tag, self.html_params(attrs)))
+        self.output.append(f"<{tag}{self.html_params(attrs)}>")
 
     def handle_endtag(self, tag):
-        self.output.append('</{}>'.format(tag))
+        self.output.append(f"</{tag}>")
 
     def handle_startendtag(self, tag, attrs):
-        self.output.append('<{}{} />'.format(tag, self.html_params(attrs)))
+        self.output.append(f"<{tag}{self.html_params(attrs)} />")
 
     def handle_data(self, data):
         self.output.append(data)
 
     def handle_entityref(self, name):
-        self.output.append('&{};'.format(name))
+        self.output.append(f"&{name};")
 
     def handle_charref(self, name):
-        self.output.append('&#{};'.format(name))
+        self.output.append(f"&#{name};")
 
     def get_output(self):
-        return ''.join(self.output)
+        return "".join(self.output)
 
 
 class PolyglotMeta(DefaultMeta):
@@ -78,11 +72,11 @@ class PolyglotMeta(DefaultMeta):
         """
         Render a widget, and convert its output to polyglot HTML.
         """
-        other_kw = getattr(field, 'render_kw', None)
+        other_kw = getattr(field, "render_kw", None)
         if other_kw is not None:
             render_kw = dict(other_kw, **render_kw)
         html = field.widget(field, **render_kw)
         parser = PolyglotHTMLParser()
         parser.feed(html)
-        output = HTMLString(parser.get_output())
+        output = Markup(parser.get_output())
         return output
