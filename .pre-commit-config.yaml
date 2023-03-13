@@ -7,6 +7,15 @@ repos:
         name: "TOML Syntax Checking"
       - id: check-yaml
         name: "YAML Syntax Checking"
+      - id: check-json
+        name: "JSON Syntax Checking"
+      - id: pretty-format-json
+        name: "JSON Code Formatting"
+        args:
+          - "--autofix"
+          - "--indent"
+          - "4"
+          - "--no-ensure-ascii"
       - id: end-of-file-fixer
         name: "Final Newline Checking"
       - id: trailing-whitespace
