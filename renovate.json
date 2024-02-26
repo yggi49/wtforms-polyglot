@@ -6,11 +6,11 @@
     "packageRules": [
         {
             "enabled": false,
+            "matchDepNames": [
+                "python"
+            ],
             "matchManagers": [
                 "gitlabci"
-            ],
-            "matchPackageNames": [
-                "python"
             ],
             "matchUpdateTypes": [
                 "major",
@@ -18,11 +18,11 @@
             ]
         },
         {
+            "matchDepNames": [
+                "python"
+            ],
             "matchManagers": [
                 "gitlabci"
-            ],
-            "matchPackageNames": [
-                "python"
             ],
             "separateMinorPatch": true
         }
